@@ -1,11 +1,3 @@
-let C1 = 0
-let C2 = 0
-let C3 = 0
-let C4 = 0
-let R1 = 0
-let R2 = 0
-let R3 = 0
-let R4 = 0
 function _3_ButtonSet () {
     if (input.buttonA1.isPressed()) {
         C1 = 1
@@ -49,60 +41,103 @@ function _3_ButtonSet () {
     }
 }
 function _4_NumberSet () {
-    if (R1 == 1 && C1 == 1) {
+    if (R1 == 1 || C1 == 1) {
         keyboard.type("1")
     }
-    if (R1 == 1 && C2 == 1) {
+    if (R1 == 1 || C2 == 1) {
         keyboard.type("2")
     }
-    if (R1 == 1 && C3 == 1) {
+    if (R1 == 1 || C3 == 1) {
         keyboard.type("3")
     }
-    if (R2 == 1 && C1 == 1) {
+    if (R2 == 1 || C1 == 1) {
         keyboard.type("4")
     }
-    if (R2 == 1 && C2 == 1) {
+    if (R2 == 1 || C2 == 1) {
         keyboard.type("5")
     }
-    if (R2 == 1 && C3 == 1) {
+    if (R2 == 1 || C3 == 1) {
         keyboard.type("6")
     }
-    if (R3 == 1 && C1 == 1) {
+    if (R3 == 1 || C1 == 1) {
         keyboard.type("7")
     }
-    if (R3 == 1 && C2 == 1) {
+    if (R3 == 1 || C2 == 1) {
         keyboard.type("8")
     }
-    if (R3 == 1 && C3 == 1) {
+    if (R3 == 1 || C3 == 1) {
         keyboard.type("9")
     }
-    if (R4 == 1 && C2 == 1) {
+    if (R4 == 1 || C2 == 1) {
         keyboard.type("0")
     }
 }
-function _1_DriverNumber () {
-    _2_ButtonScan()
-    _3_ButtonSet()
-    _4_NumberSet()
+function DriverAction () {
+    if (R1 == 1 && C4 == 1) {
+        keyboard.type("!EOL")
+    }
+    if (R2 == 1 && C4 == 1) {
+        keyboard.type("!black")
+    }
+    if (R3 == 1 && C4 == 1) {
+        keyboard.type("!dq")
+    }
+    if (R4 == 1 && C4 == 1) {
+        keyboard.type("!clear")
+    }
 }
-function _2_ButtonScan () {
+input.buttonD11.onEvent(ButtonEvent.Click, function () {
+	
+})
+function ScanDelay () {
+    pause(100)
+}
+function ButtonScanCol () {
     pins.A1.digitalWrite(true)
+    ScanDelay()
     pins.A1.digitalWrite(false)
     pins.A2.digitalWrite(true)
+    ScanDelay()
     pins.A2.digitalWrite(false)
     pins.A3.digitalWrite(true)
+    ScanDelay()
     pins.A3.digitalWrite(false)
     pins.A4.digitalWrite(true)
+    ScanDelay()
     pins.A4.digitalWrite(false)
+}
+function ButtonScanRow () {
     pins.D5.digitalWrite(true)
+    ScanDelay()
     pins.D5.digitalWrite(false)
     pins.D6.digitalWrite(true)
+    ScanDelay()
     pins.D6.digitalWrite(false)
     pins.D9.digitalWrite(true)
+    ScanDelay()
     pins.D9.digitalWrite(false)
     pins.D10.digitalWrite(true)
+    ScanDelay()
     pins.D10.digitalWrite(false)
 }
+let C4 = 0
+let C3 = 0
+let C2 = 0
+let C1 = 0
+let R4 = 0
+let R3 = 0
+let R2 = 0
+let R1 = 0
+R1 = 0
+R2 = 0
+R3 = 0
+R4 = 0
+C1 = 0
+C2 = 0
+C3 = 0
+C4 = 0
 forever(function () {
-    _1_DriverNumber()
+    ButtonScanRow()
+    DriverAction()
+    _3_ButtonSet()
 })
