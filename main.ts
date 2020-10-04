@@ -74,21 +74,30 @@ function _4_NumberSet () {
 }
 function DriverAction () {
     if (R1 == 1 && C4 == 1) {
+        EnableChat()
         keyboard.type("!EOL")
     }
     if (R2 == 1 && C4 == 1) {
+        EnableChat()
         keyboard.type("!black")
     }
     if (R3 == 1 && C4 == 1) {
+        EnableChat()
         keyboard.type("!dq")
     }
     if (R4 == 1 && C4 == 1) {
+        EnableChat()
         keyboard.type("!clear")
     }
 }
 input.buttonD11.onEvent(ButtonEvent.Click, function () {
-	
+    EnableChat()
+    keyboard.type("!yellow")
 })
+function EnableChat () {
+    keyboard.key("q", KeyboardKeyEvent.Press)
+    pause(100)
+}
 function ScanDelay () {
     pause(100)
 }
@@ -128,6 +137,7 @@ let R4 = 0
 let R3 = 0
 let R2 = 0
 let R1 = 0
+pins.D10.digitalWrite(false)
 R1 = 0
 R2 = 0
 R3 = 0
@@ -137,7 +147,5 @@ C2 = 0
 C3 = 0
 C4 = 0
 forever(function () {
-    ButtonScanRow()
-    DriverAction()
-    _3_ButtonSet()
+	
 })
