@@ -1,14 +1,13 @@
-function WriteDPins () {
-    pins.D5.digitalWrite(false)
-    pins.D6.digitalWrite(false)
-    pins.D9.digitalWrite(false)
-    pins.D10.digitalWrite(false)
-}
 function enter () {
     keyboard.type("")
 }
+input.buttonD11.onEvent(ButtonEvent.Click, function () {
+    EnableChat()
+    keyboard.type("!RED")
+    enter()
+})
 function EnableChat () {
-    keyboard.key("t", KeyboardKeyEvent.Press)
+    keyboard.key("q", KeyboardKeyEvent.Press)
     pause(100)
 }
 function clear () {
@@ -23,12 +22,10 @@ function clear () {
 }
 input.buttonD12.onEvent(ButtonEvent.Click, function () {
     EnableChat()
-    keyboard.type("!yellow")
+    keyboard.type("!YELLOW")
     enter()
-    pins.D13.digitalWrite(true)
 })
 function DrvActnScan () {
-    pins.A4.digitalWrite(false)
     if (input.buttonD5.isPressed()) {
         EnableChat()
         keyboard.type("!EOL")
@@ -162,12 +159,6 @@ function ButtonScanRow () {
         R4 = 0
     }
 }
-function WriteAPins () {
-    pins.A1.digitalWrite(false)
-    pins.A2.digitalWrite(false)
-    pins.A3.digitalWrite(false)
-    pins.A4.digitalWrite(false)
-}
 let C4 = 0
 let C3 = 0
 let C2 = 0
@@ -177,17 +168,15 @@ let R3 = 0
 let R2 = 0
 let R1 = 0
 let Scan = 0
-pins.D11.digitalWrite(false)
+pins.D13.digitalWrite(false)
 Scan = 0
 clear()
 forever(function () {
     if (Scan == 0) {
         DrvActnScan()
     } else if (Scan == 1) {
-        WriteAPins()
         ButtonScanCol()
     } else if (Scan == 2) {
-        WriteDPins()
         ButtonScanRow()
     } else if (Scan == 3) {
         NumberSet()
